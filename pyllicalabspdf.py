@@ -61,8 +61,10 @@ def pdfpress(url, title="titre", year=1900, month=1, day=1, item=5, rate=1):
                 finalurl = realurl + endurl
             #save file
                 try:
-                        urllib.request.urlopen(finalurl)
+                    urllib.request.urlopen(finalurl)
                 except urllib.error.URLError as e:
+                    print(finalurl)
+                    # si on n'a pas pu télécharger le document c'est qu'il y en a une tonne
                     if hasattr(e, 'reason'):
                         print('We failed to reach a server.')
                         print('Reason: ', e.reason)
@@ -71,4 +73,3 @@ def pdfpress(url, title="titre", year=1900, month=1, day=1, item=5, rate=1):
                         print('Error code: ', e.code)
                 else:
                         urllib.request.urlretrieve(finalurl, pdffile)
-             

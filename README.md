@@ -1,7 +1,7 @@
 Pyllica
 =======
 
-Pyllica est un outil écrit en Python permettant de récupérer des documents hébergés sur la bibliothèque numérique 
+Pyllica est un outil écrit en Python permettant de récupérer des documents hébergés sur la bibliothèque numérique
 <a href="http://gallica.bnf.fr/">Gallica</a>. Il permet notamment de constituer rapidement de grands corpus afin d'effectuer des analyses assistées par ordinateur (statistique textuelles, text mining, reconnaissance d'image).
 
 Initialement écrit par Pierre-Carl Langlais il a été très largement mis à jour et complété par Julien Schuh. La dernière version tire notamment partie de nouvelles fonctionnalités introduites sur Gallica, telles que l'extraction des pdf ou l'extraction des images. Auparavant, Pyllica ne fonctionnait que sur des documents <a href="https://en.wikipedia.org/wiki/Optical_character_recognition">OCRisés</a>). À l'occasion de cette mise à jour, le programme a été également réécrit en Python 3 (la version d'origine était en Python 2.7).
@@ -22,13 +22,13 @@ Pour chacun des outils, il y a deux fichiers: un fichier contenant le programme,
 On modifie le contenu du fichier actionpyllicalabs:
 
 ```python
-textpress(url="http://gallicalabs.bnf.fr/ark:/12148/cb32817642h/date", 
-        title="lemoderniste", 
-        year=1889, 
-        month=5, 
-        day=25, 
-        item=52, 
-        rate=7, 
+textpress(url="http://gallicalabs.bnf.fr/ark:/12148/cb32817642h/date",
+        title="lemoderniste",
+        year=1889,
+        month=5,
+        day=25,
+        item=52,
+        rate=7,
         lastpage=11)
 ```
 
