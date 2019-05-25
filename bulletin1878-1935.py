@@ -10,7 +10,11 @@ from pathlib import Path
 from requests_html import HTMLSession
 import certifi
 
-for annee in range(1878, 1936):
+anneedebut=1878
+anneedebut=1933
+anneefin=1936
+
+for annee in range(anneedebut, anneefin):
     download_dir="/home/whinpo/Philatélie/Daguins/Infos/Bulletins mensuels des postes/{0}".format(annee)
 
     # si le répertoire n'existe pas on le crée
@@ -30,7 +34,7 @@ for annee in range(1878, 1936):
     urlannee="https://gallica.bnf.fr/ark:/12148/cb32730626t/date{0}".format(annee)
     page_html=session.get(urlannee)
     # on exécute le javascript
-    print('rendering...')
+    print('rendering {0}...'.format(urlannee))
     page_html.html.render(sleep=2)
     #page_html.html.html contient le html avec javascript exécuté
     soup=bs.BeautifulSoup(page_html.html.html,'lxml')
@@ -42,12 +46,20 @@ for annee in range(1878, 1936):
             finalurl=spans.a.get('href')
             # finalurl="https://gallica.bnf.fr/ark:/12148/cb32730626t/date{0}0101".format(annee)
             print(finalurl)
+
+            # trouver comment faire pour récupérer le fichier si il est directement sur la date en question
+            # exemple : https://gallica.bnf.fr/ark:/12148/cb32730626t/date19330111
+
+
+
+
+
             #urllib.request.urlopen(finalurl)
             #urllib.request.urlopen(finalurl)
             page_html=session.get(finalurl)
 
             # on exécute le javascript
-            print('rendering...')
+            print('rendering {0}...'.format(finalurl))
             page_html.html.render(sleep=2)
 
             #page_html.html.html contient le html avec javascript exécuté
@@ -62,10 +74,16 @@ for annee in range(1878, 1936):
                 fichierPDF="{0}/PDF/{1}pdf".format(download_dir,titre)
                 fichierTXT="{0}/TXT/{1}txt".format(download_dir,titre)
 
-                print("Téléchargement de {0} vers {1}".format(lienPDF,fichierPDF))
-                wget.download(lienPDF,fichierPDF)
-                print("Téléchargement de {0} vers {1}".format(lienTXT,fichierTXT))
-                wget.download(lienTXT,fichierTXT)
+                if not os.path.exists(fichierPDF):
+                    print("Téléchargement de {0} vers {1}".format(lienPDF,fichierPDF))
+                    wget.download(lienPDF,fichierPDF)
+                else:
+                    print("{0} déjà existant".format(fichierPDF))
+                if not os.path.exists(fichierTXT):
+                    print("Téléchargement de {0} vers {1}".format(lienTXT,fichierTXT))
+                    wget.download(lienTXT,fichierTXT)
+                else:
+                    print("{0} déjà existant".format(fichierTXT))
 # on execute le javascript
 # r.html.render()
 # soup=BeautifulSoup(r.text,"lxml")
